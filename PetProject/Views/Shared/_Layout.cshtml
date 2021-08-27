@@ -9,33 +9,31 @@
     <link rel="stylesheet" href="~/css/HomeIndex.css"/>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow m-0 position-fixed w-100 navbar__visible">
-            <div class="container">
-                <a class="navbar-brand" asp-page="/Index">PetProject</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-action="Index" asp-controller="Home">Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div>
-        <main role="main" class="pb-0">
-            @RenderBody()
-        </main>
-    </div>
-
     <div class="wrapper">
         <div class="content">
-
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow m-0 w-100 navbar__visible">
+                    <div class="container">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">PetProject</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Index" asp-controller="Home">Home</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div>
+                <main role="main" class="pb-0">
+                    @RenderBody()
+                </main>
+            </div>
         </div>
         <div class="footer">
             <footer class="border-top text-muted bg-dark text-white">
@@ -47,7 +45,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

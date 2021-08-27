@@ -54,10 +54,11 @@ html {
 }
 
 body {
+  position:relative;
   margin-bottom: 10px;
 }
 html,body{
-
+    height:100%;
 }
 .wrapper{
     display:flex;
@@ -66,13 +67,9 @@ html,body{
 }
 .content{
     flex:1 0 auto;
+    
 }
 .footer {
-    flex:0 0 auto;
-    align-items:center;
-    height:5px;
-    text-align:center;
-}
-.navbar_visible{
-    z-index:50;
+    flex: 0 0 auto;
+    text-align: center;
 }

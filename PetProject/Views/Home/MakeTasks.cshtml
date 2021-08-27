@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PetProject.Models.TaskModel>
+<div class="container-fluid">
+    <h3 class="display-4 mt-2 text-center">Here you can create new to do list</h3>
+    <div class="row d-flex justify-content-center">
+        <div class="mr-3">
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="CreateTask">Create new task</a>
+        </div>
+        <div class="ml-3">
+            Выпадающий список для сортировки тасок(активные,выполненные)
+        </div>
+    </div>
+    <div class="container">
+        @if (Model.Count() != 0)
+        {
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Finish before</th>
+                        <th scope="col">Creation/Editing time</th>
+                        <th scope="col">Was edited</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in Model)
+                    {
+                    <tr>
+                        <th scope="row">@task.TaskModelId</th>
+                        <td>@task.GoalTask</td>
+                        <td>@task.FinishBefore</td>
+                        @if (task.IsEdited == true)
+                        {
+                            <td>@task.EditedAt</td>
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>@task.CreatedIn</td>
+                            <td>No</td>
+                        }
+                    </tr>
+                        
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
