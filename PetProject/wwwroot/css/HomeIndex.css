@@ -1,12 +1,15 @@
-﻿.section-top__background{
-    background:url(/img/section_top__background.jpg);
+﻿html, body{
+    
+}
+.section-top__background {
+    background: url(/img/section_top__background.jpg);
     height:100vh;
-    max-width:100vw;
+    min-width:100vw;
 }
 .section-top__body {
     font-family: sans-serif;
     color: #ffffff;
-    position: absolute;
+    position:absolute;
     top: 50%;
     right: 0;
     text-align: center;

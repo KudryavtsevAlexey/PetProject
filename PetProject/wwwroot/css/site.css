@@ -51,14 +51,13 @@ button.accept-policy {
 
 html {
   position: relative;
-  min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 10px;
 }
 html,body{
-    height:100%;
+
 }
 .wrapper{
     display:flex;
@@ -70,6 +69,10 @@ html,body{
 }
 .footer {
     flex:0 0 auto;
-    justify-content:center;
+    align-items:center;
+    height:5px;
     text-align:center;
+}
+.navbar_visible{
+    z-index:50;
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow m-0 position-fixed w-100">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow m-0 position-fixed w-100 navbar__visible">
             <div class="container">
                 <a class="navbar-brand" asp-page="/Index">PetProject</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,7 +28,7 @@
         </nav>
     </header>
     <div>
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-0">
             @RenderBody()
         </main>
     </div>
@@ -38,10 +38,8 @@
 
         </div>
         <div class="footer">
-            <footer class="border-top text-muted">
-                <div class="container">
-                    &copy; 2021 - PetProject - <a asp-area="" asp-page="/Privacy">Privacy</a>
-                </div>
+            <footer class="border-top text-muted bg-dark text-white">
+                &copy; 2021 - PetProject - <a asp-area="" asp-page="/Privacy">Privacy</a>
             </footer>
         </div>
     </div>
