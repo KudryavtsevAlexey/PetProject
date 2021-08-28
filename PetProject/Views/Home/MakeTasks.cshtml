@@ -20,6 +20,7 @@
                         <th scope="col">Finish before</th>
                         <th scope="col">Creation/Editing time</th>
                         <th scope="col">Was edited</th>
+                        <th scope="col">Detailed description</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +40,7 @@
                             <td>@task.CreatedIn</td>
                             <td>No</td>
                         }
+                        <td><a asp-controller="Home" asp-action="MoreDetails" asp-route-id="@task.TaskModelId" class="btn btn-info">More details</a></td>
                     </tr>
                         
                     }

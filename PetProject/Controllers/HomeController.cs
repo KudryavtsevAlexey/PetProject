@@ -42,5 +42,22 @@ namespace PetProject.Controllers
             }
             return View(taskModel);
         }
+        
+        public IActionResult MoreDetails(int? id)
+        {
+            if (id==null)
+            {
+                return NotFound();
+            }
+
+            var task = _dbContext.TaskModels.FirstOrDefault(t => t.TaskModelId == id);
+
+            if (task==null)
+            {
+                return NotFound();
+            }
+
+            return View(task);
+        } 
     }
 }
