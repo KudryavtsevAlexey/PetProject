@@ -1,0 +1,25 @@
+﻿@model PetProject.Models.TaskModel
+<div class="container mt-5">
+    <form asp-controller="Home" asp-action="EditTask" method="post">
+        <span asp-validation-summary="ModelOnly"></span>
+        <input type="hidden" asp-for="TaskModelId"/>
+        <div class="form-group">
+            <label asp-for="GoalTask"></label>
+            <input asp-for="GoalTask" class="form-control" />
+            <span asp-validation-for="GoalTask" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FinishBefore"></label>
+            <input asp-for="FinishBefore" class="form-control" />
+            <span asp-validation-for="FinishBefore" class="text-danger"></span>
+        </div>
+        <div class="from-group">
+            <button class="btn btn-success" type="submit">Edit Task</button>
+        </div>
+    </form>
+</div>

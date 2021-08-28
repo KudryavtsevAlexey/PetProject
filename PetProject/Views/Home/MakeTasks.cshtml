@@ -21,13 +21,18 @@
                         <th scope="col">Creation/Editing time</th>
                         <th scope="col">Was edited</th>
                         <th scope="col">Detailed description</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @{ 
+                        int id = 1;
+                    }
                     @foreach (var task in Model)
                     {
                     <tr>
-                        <th scope="row">@task.TaskModelId</th>
+                        <th scope="row">@id</th>
                         <td>@task.GoalTask</td>
                         <td>@task.FinishBefore</td>
                         @if (task.IsEdited == true)
@@ -41,6 +46,8 @@
                             <td>No</td>
                         }
                         <td><a asp-controller="Home" asp-action="MoreDetails" asp-route-id="@task.TaskModelId" class="btn btn-info">More details</a></td>
+                        <td><a asp-controller="Home" asp-action="EditTask" asp-route-id="@task.TaskModelId" class="btn btn-warning">Edit task</a></td>
+                        <td><a asp-controller="Home" asp-action="DeleteTask" asp-route-id="@task.TaskModelId" class="btn btn-danger">Delete task</a></td>
                     </tr>
                         
                     }

@@ -59,5 +59,54 @@ namespace PetProject.Controllers
 
             return View(task);
         } 
+
+        public IActionResult EditTask(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var task = _dbContext.TaskModels.FirstOrDefault(t => t.TaskModelId == id);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task);
+        }
+        [HttpPost]
+        public IActionResult EditTask(TaskModel taskModel)
+        {
+            if (ModelState.IsValid)
+            {
+                taskModel.EditedAt = DateTime.UtcNow;
+                taskModel.IsEdited = true;
+                _dbContext.TaskModels.Update(taskModel);
+                _dbContext.SaveChanges();
+                return RedirectToAction("MakeTasks", "Home");
+            }
+            return View(taskModel);
+        }
+
+        public IActionResult DeleteTask(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var task = _dbContext.TaskModels.FirstOrDefault(t => t.TaskModelId == id);
+
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            _dbContext.TaskModels.Remove(task);
+            _dbContext.SaveChanges();
+            return RedirectToAction("MakeTasks", "Home");
+        }
     }
 }
