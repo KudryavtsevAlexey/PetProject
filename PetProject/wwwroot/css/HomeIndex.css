@@ -2,23 +2,24 @@
     
 }
 .section-top__background {
-    background: url(/img/section_top__background.jpg);
-    height:100vh;
-    min-width:100vw;
+    background: url(/img/HomeIndexBackground.jpg) no-repeat;
+    height: 90vh;
+    width:100vw;
 }
 .section-top__body {
     font-family: sans-serif;
     color: #ffffff;
-    position:absolute;
-    top: 50%;
-    right: 0;
     text-align: center;
     line-height: 1.375;
 }
-.section-top__header{
-    font-size:44px;
+.section-top__header {
+    color: rgb(52,58,64);
+    font-size: 44px;
+    margin-right:20px;
+    margin-top:40px;
 }
-.section-top__buttonstyles{
-    border-radius:30px;
-    font-size:30px;
+.section-top__buttonstyles {
+    border-radius: 30px;
+    font-size: 30px;
+    margin-top: 40px;
 }

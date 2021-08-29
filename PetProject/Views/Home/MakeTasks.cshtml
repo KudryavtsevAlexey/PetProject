@@ -12,11 +12,12 @@
                 <a asp-controller="Home" asp-action="FilterByDeadline" class="dropdown-item">Deadline</a>
                 <a asp-controller="Home" asp-action="FilterByEditing" class="dropdown-item">Was edited</a>
                 <a asp-controller="Home" asp-action="FilterByTimeOfLastUpdate" class="dropdown-item">By creation/editing time</a>
+                <a asp-controller="Home" asp-action="FilterByExecutionPriority" class="dropdown-item">Execution priority</a>
 
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="w-100">
         @if (Model.Count() != 0)
         {
             <table class="table mt-4">
@@ -27,6 +28,7 @@
                         <th scope="col">Deadline</th>
                         <th scope="col">Creation/Editing time</th>
                         <th scope="col">Was edited</th>
+                        <th scope="col">Execution Priority</th>
                         <th scope="col">Detailed description</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
@@ -39,7 +41,7 @@
                     @foreach (var task in Model)
                     {
                     <tr>
-                        <th scope="row">@id</th>
+                        <th scope="row">@(id++)</th>
                         <td>@task.GoalTask</td>
                         <td>@task.FinishBefore</td>
                         @if (task.IsEdited == true)
@@ -52,11 +54,11 @@
                             <td>@task.CreatedIn</td>
                             <td>No</td>
                         }
+                        <td>@task.ExecutionPriority</td>
                         <td><a asp-controller="Home" asp-action="MoreDetails" asp-route-id="@task.TaskModelId" class="btn btn-info">More details</a></td>
                         <td><a asp-controller="Home" asp-action="EditTask" asp-route-id="@task.TaskModelId" class="btn btn-warning">Edit task</a></td>
                         <td><a asp-controller="Home" asp-action="DeleteTask" asp-route-id="@task.TaskModelId" class="btn btn-danger">Delete task</a></td>
                     </tr>
-                        
                     }
                 </tbody>
             </table>

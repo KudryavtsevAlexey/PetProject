@@ -12,15 +12,19 @@ namespace PetProject.Models
         public int TaskModelId { get; set; }
         [Required]
         [Display(Name ="Task")]
+        [StringLength(50, MinimumLength = 3)]
         public string GoalTask { get; set; }
         [Required]
+        [StringLength(500, MinimumLength = 3)]
         public string Description { get; set; }
-        //[Required]
-        //public int ExecutionPriority { get; set; }
+        [Required]
+        [Range(1,10)]
+        [Display(Name ="Execution Priority (1 - the most important)")]
+        public int? ExecutionPriority { get; set; }
         [Display(Name = "Created in")]
         public DateTime? CreatedIn { get; set; } = DateTime.UtcNow;
         [Display(Name = "Edited at")]
-        public DateTime? EditedAt { get; set; }
+        public DateTime? EditedAt { get; set; } = DateTime.UtcNow;
         [Required]
         [Display(Name = "Finish before")]
         public DateTime? FinishBefore { get; set; }

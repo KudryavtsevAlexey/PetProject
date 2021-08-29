@@ -111,17 +111,26 @@ namespace PetProject.Controllers
 
         public IActionResult FilterByDeadline()
         {
-            return View();
+            var filteredlist = _dbContext.TaskModels.OrderBy(d=>d.FinishBefore).ToList();
+            return View("MakeTasks", filteredlist);
         }
 
         public IActionResult FilterByEditing()
         {
-            return View();
+            var filteredlist = _dbContext.TaskModels.OrderByDescending(d => d.IsEdited).ToList();
+            return View("MakeTasks", filteredlist);
         }
 
         public IActionResult FilterByTimeOfLastUpdate()
         {
-            return View();
+            var filteredlist = _dbContext.TaskModels.OrderBy(d => d.EditedAt).ToList();
+            return View("MakeTasks", filteredlist);
+        }
+
+        public IActionResult FilterByExecutionPriority()
+        {
+            var filteredlist = _dbContext.TaskModels.OrderBy(d => d.ExecutionPriority).ToList();
+            return View("MakeTasks", filteredlist);
         }
     }
 }
