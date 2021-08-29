@@ -15,6 +15,8 @@ namespace PetProject.Models
         public string GoalTask { get; set; }
         [Required]
         public string Description { get; set; }
+        //[Required]
+        //public int ExecutionPriority { get; set; }
         [Display(Name = "Created in")]
         public DateTime? CreatedIn { get; set; } = DateTime.UtcNow;
         [Display(Name = "Edited at")]

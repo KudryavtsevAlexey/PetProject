@@ -3,10 +3,17 @@
     <h3 class="display-4 mt-2 text-center">Here you can create new to do list</h3>
     <div class="row d-flex justify-content-center">
         <div class="mr-3">
-            <a class="btn btn-secondary" asp-controller="Home" asp-action="CreateTask">Create new task</a>
+            <a class="btn btn-success" asp-controller="Home" asp-action="CreateTask">Create new task</a>
         </div>
-        <div class="ml-3">
-            Выпадающий список для сортировки тасок(активные,выполненные)
+        <div class="ml-3 dropdown">
+            <button class="dropdown-toggle btn btn-secondary" id="FiltrationDropdownMenu" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">Filtration</button>
+            <div class="dropdown-menu">
+                <a asp-controller="Home" asp-action="MakeTasks" class="dropdown-item">All</a>
+                <a asp-controller="Home" asp-action="FilterByDeadline" class="dropdown-item">Deadline</a>
+                <a asp-controller="Home" asp-action="FilterByEditing" class="dropdown-item">Was edited</a>
+                <a asp-controller="Home" asp-action="FilterByTimeOfLastUpdate" class="dropdown-item">By creation/editing time</a>
+
+            </div>
         </div>
     </div>
     <div class="container">
@@ -17,7 +24,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Task</th>
-                        <th scope="col">Finish before</th>
+                        <th scope="col">Deadline</th>
                         <th scope="col">Creation/Editing time</th>
                         <th scope="col">Was edited</th>
                         <th scope="col">Detailed description</th>

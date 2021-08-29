@@ -108,5 +108,20 @@ namespace PetProject.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("MakeTasks", "Home");
         }
+
+        public IActionResult FilterByDeadline()
+        {
+            return View();
+        }
+
+        public IActionResult FilterByEditing()
+        {
+            return View();
+        }
+
+        public IActionResult FilterByTimeOfLastUpdate()
+        {
+            return View();
+        }
     }
 }

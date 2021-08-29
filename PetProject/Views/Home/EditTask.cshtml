@@ -2,7 +2,7 @@
 <div class="container mt-5">
     <form asp-controller="Home" asp-action="EditTask" method="post">
         <span asp-validation-summary="ModelOnly"></span>
-        <input type="hidden" asp-for="TaskModelId"/>
+        <input type="hidden" asp-for="TaskModelId" />
         <div class="form-group">
             <label asp-for="GoalTask"></label>
             <input asp-for="GoalTask" class="form-control" />
@@ -18,6 +18,11 @@
             <input asp-for="FinishBefore" class="form-control" />
             <span asp-validation-for="FinishBefore" class="text-danger"></span>
         </div>
+        @*<div class="form-group">
+            <label asp-for="ExecutionPriority"></label>
+            <input asp-for="ExecutionPriority" class="form-control" />
+            <span asp-validation-for="ExecutionPriority" class="text-danger"></span>
+        </div>*@
         <div class="from-group">
             <button class="btn btn-success" type="submit">Edit Task</button>
         </div>
