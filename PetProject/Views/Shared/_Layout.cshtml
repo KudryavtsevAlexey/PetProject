@@ -13,7 +13,7 @@
     <div class="wrapper">
         <div class="content">
             <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow m-0 w-100 navbar__visible">
+                <nav class="navbar navbar-expand-sm navbar-expand-sm navbar-light bg-light border-bottom box-shadow m-0 w-100 navbar__visible">
                     <div class="container">
                         <a class="navbar-brand" asp-controller="Home" asp-action="Index">PetProject</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -26,6 +26,17 @@
                                     <a class="nav-link text-dark" asp-action="Index" asp-controller="Home">Home</a>
                                 </li>
                             </ul>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-primary mr-3" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="btn btn-outline-primary ml-3" asp-controller="Account" asp-action="SignUp">Registration</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-warning" asp-controller="Account" asp-action="Logout">Logout</a>
+                            }
                         </div>
                     </div>
                 </nav>

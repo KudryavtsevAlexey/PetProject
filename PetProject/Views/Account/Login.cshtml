@@ -1,0 +1,25 @@
+﻿@model PetProject.Models.LoginModel
+
+<div class="container mt-4">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe"/>
+            <span asp-validation-for="RememberMe"></span>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit" asp-controller="Account" asp-action="Login">Login</button>
+        </div>
+    </form>
+</div>
