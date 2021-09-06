@@ -20,7 +20,7 @@ namespace PetProject.Controllers
             _signInManager = signInManager;
         }
 
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
             return View();
         }
@@ -41,9 +41,9 @@ namespace PetProject.Controllers
                 return View(loginModel);
             }
 
-            var psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false,false);
+            var Psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false,false);
 
-            if (psi.Succeeded)
+            if (Psi.Succeeded)
             {
                 return RedirectToAction("MakeTasks", "Home");
             }

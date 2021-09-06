@@ -18,8 +18,9 @@
             <input asp-for="RememberMe"/>
             <span asp-validation-for="RememberMe"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group d-flex justify-content-between">
             <button class="btn btn-primary" type="submit" asp-controller="Account" asp-action="Login">Login</button>
+            <a class="btn btn-link" asp-controller="Account" asp-action="SignUp">Return to registration page</a>
         </div>
     </form>
 </div>

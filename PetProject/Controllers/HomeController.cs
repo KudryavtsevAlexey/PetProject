@@ -5,25 +5,39 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using PetProject.Entities;
 
 namespace PetProject.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ApplicationDbContext _dbContext = null;
+        private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ApplicationDbContext dbContext)
+        public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
-        }
-        public IActionResult MakeTasks()
+        } 
+        public async Task<IActionResult> MakeTasks()
         {
-            var tasks = _dbContext.TaskModels.ToList();
-            return View(tasks);
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var tasks = _dbContext.TaskModels.Where(t=>user == t.ApplicationUser).ToList();
+                
+                return View(tasks);
+            }
+
+            return RedirectToAction("Login", "Account");
         }
         [HttpGet]
         public IActionResult CreateTask()
@@ -32,25 +46,28 @@ namespace PetProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateTask(TaskModel taskModel)
+        public async Task<IActionResult> CreateTask(TaskModel taskModel)
         {
+            var user = await _userManager.GetUserAsync(User);
+            taskModel.ApplicationUser = user;
             if (ModelState.IsValid)
             {
                 _dbContext.TaskModels.Add(taskModel);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction("MakeTasks", "Home");
             }
             return View(taskModel);
         }
         
-        public IActionResult MoreDetails(int? id)
+        public async Task<IActionResult> MoreDetails(int? id)
         {
+            var user = await _userManager.GetUserAsync(User);
             if (id==null)
             {
                 return NotFound();
             }
 
-            var task = _dbContext.TaskModels.FirstOrDefault(t => t.TaskModelId == id);
+            var task = _dbContext.TaskModels.FirstOrDefault(t => id == t.TaskModelId);
 
             if (task==null)
             {
@@ -60,14 +77,15 @@ namespace PetProject.Controllers
             return View(task);
         } 
 
-        public IActionResult EditTask(int? id)
+        public async Task<IActionResult> EditTask(int? id)
         {
+            var user = await _userManager.GetUserAsync(User);
             if (id == null)
             {
                 return NotFound();
             }
 
-            var task = _dbContext.TaskModels.FirstOrDefault(t => t.TaskModelId == id);
+            var task = _dbContext.TaskModels.FirstOrDefault(t => id == t.TaskModelId);
 
             if (task == null)
             {
@@ -77,21 +95,26 @@ namespace PetProject.Controllers
             return View(task);
         }
         [HttpPost]
-        public IActionResult EditTask(TaskModel taskModel)
+        public async Task<IActionResult> EditTask(TaskModel taskModel)
         {
+            var user = await _userManager.GetUserAsync(User);
             if (ModelState.IsValid)
             {
                 taskModel.EditedAt = DateTime.UtcNow;
                 taskModel.IsEdited = true;
+                //var taskToDelete = _dbContext.TaskModels.FirstOrDefault(t => taskModel.TaskModelId == t.TaskModelId);
+                //user.TaskModels.Remove(taskToDelete);
+                //user.TaskModels.Insert(taskModel.TaskModelId, taskModel);
                 _dbContext.TaskModels.Update(taskModel);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
                 return RedirectToAction("MakeTasks", "Home");
             }
             return View(taskModel);
         }
 
-        public IActionResult DeleteTask(int? id)
+        public async Task<IActionResult> DeleteTask(int? id)
         {
+            var user = await _userManager.GetUserAsync(User);
             if (id == null)
             {
                 return NotFound();
@@ -104,32 +127,37 @@ namespace PetProject.Controllers
                 return NotFound();
             }
 
-            _dbContext.TaskModels.Remove(task);
-            _dbContext.SaveChanges();
+
+            user.TaskModels.Remove(task);
+            await _dbContext.SaveChangesAsync();
             return RedirectToAction("MakeTasks", "Home");
         }
 
-        public IActionResult FilterByDeadline()
+        public async Task<IActionResult> FilterByDeadline()
         {
-            var filteredList = _dbContext.TaskModels.OrderBy(d=>d.FinishBefore).ToList();
+            var user = await _userManager.GetUserAsync(User);
+            var filteredList = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).OrderBy(d=>d.FinishBefore).ToList();
             return View("MakeTasks", filteredList);
         }
 
-        public IActionResult FilterByEditing()
+        public async Task<IActionResult> FilterByEditing()
         {
-            var filteredList = _dbContext.TaskModels.OrderByDescending(d => d.IsEdited).ToList();
+            var user = await _userManager.GetUserAsync(User);
+            var filteredList = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).OrderByDescending(d => d.IsEdited).ToList();
             return View("MakeTasks", filteredList);
         }
 
-        public IActionResult FilterByTimeOfLastUpdate()
+        public async Task<IActionResult> FilterByTimeOfLastUpdate()
         {
-            var filteredList = _dbContext.TaskModels.OrderBy(d => d.EditedAt).ToList();
+            var user = await _userManager.GetUserAsync(User);
+            var filteredList = _dbContext.TaskModels.Where(t=>t.ApplicationUser==user).OrderBy(d => d.EditedAt).ToList();
             return View("MakeTasks", filteredList);
         }
 
-        public IActionResult FilterByExecutionPriority()
+        public async Task<IActionResult> FilterByExecutionPriority()
         {
-            var filteredList = _dbContext.TaskModels.OrderBy(d => d.ExecutionPriority).ToList();
+            var user = await _userManager.GetUserAsync(User);
+            var filteredList = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).OrderBy(d => d.ExecutionPriority).ToList();
             return View("MakeTasks", filteredList);
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using PetProject.Entities;
 
 namespace PetProject.Models
 {
@@ -30,5 +31,9 @@ namespace PetProject.Models
         public DateTime? FinishBefore { get; set; }
         [Display(Name = "Was edited")]
         public bool IsEdited { get; set; } = false;
+        
+        public ApplicationUser ApplicationUser { get; set; }
+        public int ApplicationUserOfTasksId { get; set; }
+        
     }
 }
