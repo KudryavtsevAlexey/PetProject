@@ -1,0 +1,50 @@
+﻿@model PetProject.Entities.ApplicationUser
+<div class="container mt-5">
+    <div class="profile">
+        <div class="profile__body row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title mb-4">
+                            <div class="d-flex justify-content-start">
+                                <div class="profile__image">
+                                    <img src="http://placehold.it/150x150" alt="Your logo/avatar" width="150" height="150" class="img-thumbnail">
+                                </div>
+                                <div class="profile__main-information">
+                                    <div class="profile__description mt-4 ml-4">@Model.UserName</div>
+                                    <div class="profile__description mt-4 ml-4">Количество активных задач - @Model.TaskModels.Count</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>First name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@Model.FirstName</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Last name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@Model.LastName</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Date of birth</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@Model.DateOfBirth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

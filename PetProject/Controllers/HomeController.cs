@@ -102,9 +102,6 @@ namespace PetProject.Controllers
             {
                 taskModel.EditedAt = DateTime.UtcNow;
                 taskModel.IsEdited = true;
-                //var taskToDelete = _dbContext.TaskModels.FirstOrDefault(t => taskModel.TaskModelId == t.TaskModelId);
-                //user.TaskModels.Remove(taskToDelete);
-                //user.TaskModels.Insert(taskModel.TaskModelId, taskModel);
                 _dbContext.TaskModels.Update(taskModel);
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction("MakeTasks", "Home");
@@ -161,5 +158,12 @@ namespace PetProject.Controllers
             return View("MakeTasks", filteredList);
         }
 
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            user.TaskModels = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).ToList();
+            return View(user);
+        }
+        
     }
 }

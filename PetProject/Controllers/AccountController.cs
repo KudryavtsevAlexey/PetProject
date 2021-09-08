@@ -41,7 +41,7 @@ namespace PetProject.Controllers
                 return View(loginModel);
             }
 
-            var Psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, false,false);
+            var Psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe,false);
 
             if (Psi.Succeeded)
             {

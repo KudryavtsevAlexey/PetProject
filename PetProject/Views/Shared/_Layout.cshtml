@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/HomeIndex.css" />
     <link href="~/css/MoreDetails.css" rel="stylesheet" />
+    <link href="~/css/Profile.css" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
@@ -35,7 +36,8 @@
                             }
                             else
                             {
-                                <a class="btn btn-warning" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <a class="btn btn-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <a class="btn btn-info" asp-controller="Home" asp-action="Profile">Profile</a>
                             }
                         </div>
                     </div>
