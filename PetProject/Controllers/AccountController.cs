@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetProject.Entities;
@@ -13,11 +16,15 @@ namespace PetProject.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Login()
@@ -35,13 +42,13 @@ namespace PetProject.Controllers
 
             var user = await _userManager.FindByNameAsync(loginModel.Email);
 
-            if (user==null)
+            if (user == null)
             {
                 ModelState.AddModelError("", "User not found");
                 return View(loginModel);
             }
 
-            var Psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe,false);
+            var Psi = await _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);
 
             if (Psi.Succeeded)
             {
@@ -78,7 +85,6 @@ namespace PetProject.Controllers
                         ModelState.AddModelError("", error.Description);
                     }
                 }
-
                 await _signInManager.SignInAsync(user, false);
                 return RedirectToAction("MakeTasks", "Home");
             }
@@ -91,5 +97,13 @@ namespace PetProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // private async Task<string> UploadImage(string folderPath, IFormFile image)
+        // {
+        //     folderPath += Guid.NewGuid().ToString() + "_" + image.FileName;
+        //     string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+        //
+        //     await image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+        //     return "/" + folderPath;
+        // }
     }
 }

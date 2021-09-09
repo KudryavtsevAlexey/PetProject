@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PetProject.Entities;
 
 namespace PetProject.Controllers
@@ -125,7 +127,7 @@ namespace PetProject.Controllers
             }
 
 
-            user.TaskModels.Remove(task);
+            user.Tasks.Remove(task);
             await _dbContext.SaveChangesAsync();
             return RedirectToAction("MakeTasks", "Home");
         }
@@ -160,9 +162,14 @@ namespace PetProject.Controllers
 
         public async Task<IActionResult> Profile()
         {
+            var users = _dbContext.Users.Include(t => t.Tasks).ToList();
             var user = await _userManager.GetUserAsync(User);
-            user.TaskModels = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).ToList();
             return View(user);
+        }
+
+        public IActionResult ChangeAvatar()
+        {
+            return View("Index");
         }
         
     }

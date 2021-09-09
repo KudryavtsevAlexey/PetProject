@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using PetProject.Entities;
 
 namespace PetProject.Models
@@ -21,7 +23,6 @@ namespace PetProject.Models
         [Required, Compare("Password", ErrorMessage = "Passwords mismatch"), Display(Name = "Confirm password")]
         [DataType(DataType.Password)]
         public string ConfirmedPassword { get; set; }
-
         public DateTime? DateOfBirth { get; set; }
     }
 }
