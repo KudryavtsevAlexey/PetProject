@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PetProject.Entities;
@@ -129,14 +124,5 @@ namespace PetProject.Controllers
             } 
             return View(changedPasswordModel);
         }
-        
-        // private async Task<string> UploadImage(string folderPath, IFormFile image)
-        // {
-        //     folderPath += Guid.NewGuid().ToString() + "_" + image.FileName;
-        //     string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
-        //
-        //     await image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-        //     return "/" + folderPath;
-        // }
     }
 }

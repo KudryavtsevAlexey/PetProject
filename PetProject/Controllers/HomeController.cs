@@ -2,11 +2,9 @@
 using PetProject.Data;
 using PetProject.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetProject.Entities;
@@ -144,7 +142,8 @@ namespace PetProject.Controllers
         public async Task<IActionResult> FilterByEditing()
         {
             var user = await _userManager.GetUserAsync(User);
-            var filteredList = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).OrderByDescending(d => d.IsEdited).ToList();
+            var filteredList = _dbContext.TaskModels.Where(t => t.ApplicationUser == user).OrderByDescending(d => d.IsEdited)
+                .ToList();
             return View("MakeTasks", filteredList);
         }
 
