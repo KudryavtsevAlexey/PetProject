@@ -28,7 +28,9 @@ namespace PetProject.Controllers
         public IActionResult Index()
         {
             return View();
-        } 
+        }
+        
+        [Authorize]
         public async Task<IActionResult> MakeTasks()
         {
             if (User.Identity.IsAuthenticated)
@@ -166,11 +168,5 @@ namespace PetProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             return View(user);
         }
-
-        public IActionResult ChangeAvatar()
-        {
-            return View("Index");
-        }
-        
     }
 }

@@ -13,6 +13,9 @@
                                 <div class="profile__main-information">
                                     <div class="profile__description mt-4 ml-4">@Model.UserName</div>
                                     <div class="profile__description mt-4 ml-4">Количество активных задач - @Model.Tasks.Count</div>
+                                    <div class="mt-4 ml-4">
+                                        <a class="btn btn-link" asp-controller="Account" asp-action="ChangePassword">Change password</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

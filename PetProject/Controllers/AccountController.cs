@@ -97,6 +97,39 @@ namespace PetProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangedPasswordModel changedPasswordModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var isCurrent = await _userManager.CheckPasswordAsync(user, changedPasswordModel.CurrentPassword);
+                if (isCurrent)
+                {
+                    var result = await _userManager.ChangePasswordAsync(user, changedPasswordModel.CurrentPassword,
+                        changedPasswordModel.ChangedPassword);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignOutAsync();
+                        ModelState.Clear();
+                        ViewBag.IsSuccess = true;
+                        return View();
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }   
+            } 
+            return View(changedPasswordModel);
+        }
+        
         // private async Task<string> UploadImage(string folderPath, IFormFile image)
         // {
         //     folderPath += Guid.NewGuid().ToString() + "_" + image.FileName;

@@ -21,7 +21,7 @@ namespace PetProject
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -37,7 +37,11 @@ namespace PetProject
                     config.Password.RequireLowercase = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = Configuration["Application:LoginPath"];
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
         }
 
@@ -55,7 +59,7 @@ namespace PetProject
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
