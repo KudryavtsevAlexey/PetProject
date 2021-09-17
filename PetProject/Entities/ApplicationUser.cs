@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using PetProject.Models;
+using ToDoList.Models;
 
-namespace PetProject.Entities
+namespace ToDoList.Entities
 {
     public class ApplicationUser : IdentityUser
     {

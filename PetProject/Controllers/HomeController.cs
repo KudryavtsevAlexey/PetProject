@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PetProject.Data;
-using PetProject.Models;
+using ToDoList.Data;
+using ToDoList.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using PetProject.Entities;
+using ToDoList.Entities;
 
-namespace PetProject.Controllers
+namespace ToDoList.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -28,7 +28,6 @@ namespace PetProject.Controllers
             return View();
         }
         
-        [Authorize]
         public async Task<IActionResult> MakeTasks()
         {
             if (User.Identity.IsAuthenticated)

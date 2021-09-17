@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace PetProject.Models
+namespace ToDoList.Models
 {
     public class SignUpModel
     {

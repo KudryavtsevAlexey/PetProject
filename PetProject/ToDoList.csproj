@@ -20,12 +20,4 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\avatars" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\avatars\defaultAvatar.png" />
-  </ItemGroup>
-
 </Project>

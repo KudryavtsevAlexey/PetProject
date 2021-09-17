@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using PetProject.Entities;
-using PetProject.Models;
+using ToDoList.Entities;
+using ToDoList.Models;
 
-namespace PetProject.Controllers
+namespace ToDoList.Controllers
 {
     public class AccountController : Controller
     {

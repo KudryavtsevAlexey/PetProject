@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PetProject.Models;
+using ToDoList.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using PetProject.Entities;
+using ToDoList.Entities;
 
-namespace PetProject.Data
+namespace ToDoList.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {

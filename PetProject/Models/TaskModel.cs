@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using PetProject.Entities;
+using ToDoList.Entities;
 
-namespace PetProject.Models
+namespace ToDoList.Models
 {
     public class TaskModel
     {

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PetProject.Data;
+using ToDoList.Data;
 using Microsoft.AspNetCore.Identity;
-using PetProject.Entities;
+using ToDoList.Entities;
 
-namespace PetProject
+namespace ToDoList
 {
     public class Startup
     {
