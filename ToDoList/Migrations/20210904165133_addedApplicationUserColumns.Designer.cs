@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PetProject.Data;
+using ToDoList.Data;
 
 namespace PetProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210904165133_addedApplicationUserColumns")]
+    partial class addedApplicationUserColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,12 +236,6 @@ namespace PetProject.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ApplicationUserOfTasksId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedIn")
                         .HasColumnType("datetime2");
 
@@ -268,8 +264,6 @@ namespace PetProject.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("TaskModelId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("TaskModels");
                 });
@@ -323,20 +317,6 @@ namespace PetProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PetProject.Models.TaskModel", b =>
-                {
-                    b.HasOne("PetProject.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany("TaskModels")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.Navigation("ApplicationUser");
-                });
-
-            modelBuilder.Entity("PetProject.Entities.ApplicationUser", b =>
-                {
-                    b.Navigation("TaskModels");
                 });
 #pragma warning restore 612, 618
         }
